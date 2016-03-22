@@ -20,16 +20,16 @@ namespace ChargeSimVisualizer
             /*
             * Charge System Initial Conditions
             */
-          ////////////////////////////////////////
-            for (int i = -3; i <= 3; i++) {
-                for (int j = -3; j <= 3; j++) {
-                    sim.NewCharge(i, j, 1E-4, 1E-10);
+            ////////////////////////////////////////
+            for (int i = -4; i <= 4; i++) {
+                for (int j = -4; j <= 4; j++) {
+                    sim.NewCharge(i*0.5, j*0.5, 1, 1);
                 }
             }
-            sim.NewBoundary(-10, 10, 7, -7);
-          ////////////////////////////////////////
+            sim.NewBoundary(-4, 4, -4, 4);
+            ////////////////////////////////////////
 
-            using (var app = new GameWindow(900, 600))
+            using (var app = new GameWindow(900, 900))
             {
                 app.Load += (sender, e) =>
                 {
@@ -46,9 +46,11 @@ namespace ChargeSimVisualizer
                 app.UpdateFrame += (sender, e) =>
                 {
                     // Update Particles
-                    sim.UpdateSystem();
+                    for (int i = 0; i < 5; i++) {
+                        sim.UpdateSystem();
+                    }
                     particles = sim.GetSystemState();
-                    if (app.Keyboard[Key.Escape])
+                    if (Keyboard.GetState()[Key.Escape])
                     {
                         app.Exit();
                     }
@@ -60,16 +62,16 @@ namespace ChargeSimVisualizer
                     GL.MatrixMode(MatrixMode.Projection);
                     GL.LoadIdentity();
 
-                    GL.Ortho(-10.0, 10.0, -7.0, 7.0, 0.0, 4.0);
+                    GL.Ortho(-10.0, 10.0, -10.0, 10.0, 0.0, 4.0);
                     for (int i = 0; i < particles.Count; i++) {
                         particle = particles[i];
                         GL.Begin(PrimitiveType.TriangleFan);
-                        graphics.DrawCircle(particle.x, particle.y, 0.1, 20.0);
+                        graphics.DrawCircle(particle.x, particle.y, 0.05, 20.0);
                         GL.End();
                     }
                     app.SwapBuffers();
                 };
-                app.Run(60.0);
+                app.Run(200.0);
             }
         }
 

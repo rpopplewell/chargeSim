@@ -5,14 +5,16 @@ namespace ChargeSim
 {
     public class ChargeSystem
     {
-        /*
-        * Object Section
-        */
-
-        public const double deltaT = 0.00000001;
-        public const double e = 1.6021766208E-19;
+        public const double deltaT = 0.0000001;
         public const double k = 8.9875517873681764E9;
-        public const double c = 299792458;
+
+        Vec distance;
+        Vec acceleration1;
+        Vec acceleration2;
+        Coordinates accel1;
+        Coordinates accel2;
+        double c = 200;
+        double f;
 
         public double t = 0;
         public List<Charge> charges = new List<Charge>();
@@ -60,18 +62,18 @@ namespace ChargeSim
             public int topY;
             public int bottomY;
 
-            public Boundary(int leftX, int rightX, int topY, int bottomY)
+            public Boundary(int leftX, int rightX, int bottomY, int topY)
             {
                 this.leftX = leftX;
                 this.rightX = rightX;
-                this.topY = topY;
                 this.bottomY = bottomY;
+                this.topY = topY;
             }
         }
 
-        public void NewBoundary(int leftX, int rightX, int topY, int bottomY)
+        public void NewBoundary(int leftX, int rightX, int bottomY, int topY)
         {
-            Boundary boundary = new Boundary(leftX, rightX, topY,bottomY);
+            Boundary boundary = new Boundary(leftX, rightX, bottomY, topY);
             bounderies.Add(boundary);
         }
 
@@ -131,58 +133,69 @@ namespace ChargeSim
         public void UpdateSystem()
         {
             t = t + deltaT;
-            Console.Clear();
-            Vec distance;
-            Vec acceleration;
-
             // Calculate forces on charges
 
             for (int i = 0; i < charges.Count; i++) {
-                for (int j = 0; j < charges.Count; j++) {
-                    if (i != j) {
-                        distance = GetDistVec(charges[i], charges[j]);
-                        acceleration.Magnitude = Math.Abs(((charges[i].q * charges[j].q * k) / Math.Pow(distance.Magnitude,2)) / charges[i].m);
-                        acceleration.Direction = distance.Direction;
-                        SetVelVec(charges[i], acceleration);
-                    }
+                for (int j = i + 1; j < charges.Count; j++) {
+
+                    distance = GetDistVec(charges[i], charges[j]);
+                    f = charges[i].q * charges[j].q * k / (distance.Magnitude * distance.Magnitude);
+
+                    acceleration1.Magnitude = Math.Abs(f / charges[i].m);
+                    acceleration2.Magnitude = Math.Abs(f / charges[j].m);
+                    acceleration1.Direction = distance.Direction;
+                    acceleration2.Direction = distance.Direction += Math.PI;
+
+                    // DAMPENING
+                    accel1 = PolarToComponent(acceleration1);
+                    accel2 = PolarToComponent(acceleration2);
+
+                    accel1.x -= c * charges[i].vx;
+                    accel1.y -= c * charges[i].vy;
+                    accel2.x -= c * charges[j].vx;
+                    accel2.y -= c * charges[j].vy;
+                    // DAMPENING
+
+                    SetVelVec(charges[i], accel1);
+                    SetVelVec(charges[j], accel2);
                 }
             }
-
             // Update positions on charges
 
             for (int i = 0; i < charges.Count; i++)
             {
-                Charge charge = charges[i];
-                Console.WriteLine((i + 1) + ": (" + charge.x + ", " + charge.y + ")");
-                charge.x = charge.x + charge.vx * deltaT;
-                charge.y = charge.y + charge.vy * deltaT;
-                RunBoundaries(charge);
+                //Console.WriteLine((i + 1) + ": (" + charge.x + ", " + charge.y + ")");
+                charges[i].x = charges[i].x + charges[i].vx * deltaT;
+                charges[i].y = charges[i].y + charges[i].vy * deltaT;
+                RunBoundaries(charges[i]);
             }
-            Console.WriteLine("\nt = " + Math.Round((decimal) t, 5));
+            Console.Clear();
+            Console.Write("t = " + Math.Round((decimal) t, 5));
         }
 
-        /*Dampens movement for "non-elastic" simulation*/
 
-        /*
-        private void Dampen(Charge p, double factor)
+        /* Subtracts vec2 from vec1*/
+        private Vec VectorSubtraction(Vec vec1, Vec vec2)
         {
-            Coordinates coords = NewCoordinates(p.vx, p.vy);
-            Vec velVec = ComponentToPolar(coords);
-            double ke = 1 / 2 * p.m * Math.Pow(velVec.Magnitude, 2);
-            ke = factor * ke;
-            velVec.Magnitude = Math.Sqrt((2 * ke) / p.m);
-
-            coords = PolarToComponent(velVec);
-            p.vx = coords.x;
-            p.vy = coords.y;
+            Coordinates result;
+            Coordinates coords1 = PolarToComponent(vec1);
+            Coordinates coords2 = PolarToComponent(vec2);
+            result.x = coords1.x - coords2.x;
+            result.y = coords1.y - coords2.y;
+            return ComponentToPolar(result);
         }
-        */
 
         /*Sets the velocity vector of a given charge*/
 
         private void SetVelVec(Charge p1, Vec acceleration)
         {
             Coordinates accel = PolarToComponent(acceleration);
+            p1.vx = p1.vx + accel.x * deltaT;
+            p1.vy = p1.vy + accel.y * deltaT;
+        }
+
+        private void SetVelVec(Charge p1, Coordinates accel)
+        {
             p1.vx = p1.vx + accel.x * deltaT;
             p1.vy = p1.vy + accel.y * deltaT;
         }
