@@ -1,0 +1,11 @@
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\bin\Release\ChargeSim Visualizer.exe.config
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\bin\Release\ChargeSim Visualizer.exe
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\bin\Release\ChargeSim Visualizer.pdb
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\bin\Release\ChargeSim.dll
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\bin\Release\OpenTK.dll
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\bin\Release\ChargeSim.pdb
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\bin\Release\OpenTK.pdb
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\bin\Release\OpenTK.xml
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\obj\Release\ChargeSim Visualizer.csprojResolveAssemblyReference.cache
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\obj\Release\ChargeSim Visualizer.exe
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim Visualizer\obj\Release\ChargeSim Visualizer.pdb

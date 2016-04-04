@@ -21,15 +21,13 @@ namespace ChargeSimVisualizer
             * Charge System Initial Conditions
             */
             ////////////////////////////////////////
-            for (int i = -4; i <= 4; i++) {
-                for (int j = -4; j <= 4; j++) {
-                    sim.NewCharge(i*0.5, j*0.5, 1, 1);
-                }
+            for (int i = -50; i <= 50; i++) {
+                sim.NewCharge(i*0.05, 0, 1, 1);
             }
-            sim.NewBoundary(-4, 4, -4, 4);
+            sim.NewBoundary(-10, 10, 0, 0);
             ////////////////////////////////////////
 
-            using (var app = new GameWindow(900, 900))
+            using (var app = new GameWindow(400, 400))
             {
                 app.Load += (sender, e) =>
                 {
@@ -52,6 +50,7 @@ namespace ChargeSimVisualizer
                     particles = sim.GetSystemState();
                     if (Keyboard.GetState()[Key.Escape])
                     {
+                        sim.LogData();
                         app.Exit();
                     }
                 };
@@ -62,11 +61,11 @@ namespace ChargeSimVisualizer
                     GL.MatrixMode(MatrixMode.Projection);
                     GL.LoadIdentity();
 
-                    GL.Ortho(-10.0, 10.0, -10.0, 10.0, 0.0, 4.0);
+                    GL.Ortho(-10.0, 10.0, -4.0, 4.0, 0.0, 4.0);
                     for (int i = 0; i < particles.Count; i++) {
                         particle = particles[i];
                         GL.Begin(PrimitiveType.TriangleFan);
-                        graphics.DrawCircle(particle.x, particle.y, 0.05, 20.0);
+                        graphics.DrawCircle(particle.x, particle.y, 0.05, 10.0);
                         GL.End();
                     }
                     app.SwapBuffers();

@@ -1,0 +1,4 @@
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim\bin\Release\ChargeSim.dll
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim\bin\Release\ChargeSim.pdb
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim\obj\Release\ChargeSim.dll
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim\obj\Release\ChargeSim.pdb

@@ -5,7 +5,7 @@ namespace ChargeSim
 {
     public class ChargeSystem
     {
-        public const double deltaT = 0.0000001;
+        public const double deltaT = 0.00000001;
         public const double k = 8.9875517873681764E9;
 
         Vec distance;
@@ -13,7 +13,7 @@ namespace ChargeSim
         Vec acceleration2;
         Coordinates accel1;
         Coordinates accel2;
-        double c = 200;
+        double c = 2000;
         double f;
 
         public double t = 0;
@@ -173,18 +173,6 @@ namespace ChargeSim
             Console.Write("t = " + Math.Round((decimal) t, 5));
         }
 
-
-        /* Subtracts vec2 from vec1*/
-        private Vec VectorSubtraction(Vec vec1, Vec vec2)
-        {
-            Coordinates result;
-            Coordinates coords1 = PolarToComponent(vec1);
-            Coordinates coords2 = PolarToComponent(vec2);
-            result.x = coords1.x - coords2.x;
-            result.y = coords1.y - coords2.y;
-            return ComponentToPolar(result);
-        }
-
         /*Sets the velocity vector of a given charge*/
 
         private void SetVelVec(Charge p1, Vec acceleration)
@@ -274,5 +262,16 @@ namespace ChargeSim
             Coordinates nullCoords = NewCoordinates(0, 0);
             return ComponentToPolar(coords, nullCoords);
         }
+
+        public void LogData() {
+            string data = "";
+            for (int i = 0; i < charges.Count - 1; i++) {
+                Vec dist = GetDistVec(charges[i], charges[i+1]);
+                double lambda = 1 / dist.Magnitude;
+                data = data + (charges[i].x + ", " + lambda.ToString() + ", " + "\"color\", \"k\", ");
+            }
+            System.IO.File.WriteAllText(@"C:\Users\Public\TestFolder\chargedata.txt", data);
+        }
+
     }
 }

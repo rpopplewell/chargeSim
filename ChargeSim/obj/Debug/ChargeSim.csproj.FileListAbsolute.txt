@@ -1,0 +1,10 @@
+C:\Users\Chris\Documents\GitHub\Charge-Simulator\ChargeSim\bin\Debug\ChargeSim.dll
+C:\Users\Chris\Documents\GitHub\Charge-Simulator\ChargeSim\bin\Debug\ChargeSim.pdb
+C:\Users\Chris\Documents\GitHub\Charge-Simulator\ChargeSim\obj\Debug\ChargeSim.csprojResolveAssemblyReference.cache
+C:\Users\Chris\Documents\GitHub\Charge-Simulator\ChargeSim\obj\Debug\ChargeSim.dll
+C:\Users\Chris\Documents\GitHub\Charge-Simulator\ChargeSim\obj\Debug\ChargeSim.pdb
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim\bin\Debug\ChargeSim.dll
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim\bin\Debug\ChargeSim.pdb
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim\obj\Debug\ChargeSim.dll
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim\obj\Debug\ChargeSim.pdb
+C:\Users\Chris\Documents\Visual Studio 2015\Projects\Charge-Simulator\ChargeSim\obj\Debug\ChargeSim.csprojResolveAssemblyReference.cache
