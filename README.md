@@ -10,5 +10,5 @@ A simulation created for understanding the nature of [line charges](https://aapt
 It has a visualizer as well.
 ***
 <p align="center">
-  <img src="https://media.giphy.com/media/xThuWlHZT7zEPGyYP6/giphy.gif" alt="Charge-Sim" height="500" width="500">
+  <img src="https://media.giphy.com/media/AtOvq8pI42YBBZvDFv/giphy.gif" alt="Charge-Sim" height="400" width="400">
 </p>
